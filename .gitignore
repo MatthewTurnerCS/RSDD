@@ -1,0 +1,5 @@
+bin/*
+src/fuzzsmt.jar
+src/build.xml
+src/fuzzsmt
+.settings/*
