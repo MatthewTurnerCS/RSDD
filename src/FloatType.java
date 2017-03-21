@@ -20,12 +20,33 @@
 
 public class FloatType extends SMTType {
 
-  public final static FloatType floatType = new FloatType();
+	//public final static FloatType floatType = new FloatType();
 
-  private FloatType() {}
+	protected String name;
 
-  public String toString() {
-    return "Float";
-  }
+	protected int bits;  
+
+	public FloatType(int b) {	  
+		assert(b > 0);
+		this.bits = b;
+		this.name = "Float[" + b + "]";
+	}
+
+	public String toString() {
+		return this.name;
+	}
+
+	public int getWidth(){
+		return this.bits;
+	}
+
+	public boolean equals (Object o){
+		assert (o != null);
+
+		if (! (o instanceof FloatType))
+			return false;
+
+		return this.bits == ((FloatType) o).bits;
+	}
 
 }

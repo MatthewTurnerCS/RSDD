@@ -40,7 +40,7 @@ public enum SMTLogic
   QF_UFNIA,
   QF_UFNRA,
   QF_UFRDL,
-  FP, /* Added 2017? See http://smtlib.cs.uiowa.edu/logics.shtml */
+  QF_FP, /* Added 2017? See http://smtlib.cs.uiowa.edu/logics.shtml */
   AUFLIA,
   AUFLIRA,
   AUFNIRA;
