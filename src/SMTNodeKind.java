@@ -18,7 +18,6 @@
  */
 
 public enum SMTNodeKind { 
-
   /* input */
   CONST("constant", 0),
   VAR("variable", 0), 
@@ -32,46 +31,6 @@ public enum SMTNodeKind {
   XOR("xor", 2),
   IFF("iff", 2),
   IF_THEN_ELSE("if_then_else", 3), // if-then-else on boolean operands 
-  /* bit-vector operators: */
-  /* unary operators */
-  BVNOT("bvnot", 1),
-  BVNEG("bvneg", 1),
-  /* unary operators with index */
-  EXTRACT("extract", 1),
-  REPEAT("repeat", 1),
-  ZERO_EXTEND("zero_extend", 1),
-  SIGN_EXTEND("sign_extend", 1),
-  ROTATE_LEFT("rotate_left", 1),
-  ROTATE_RIGHT("rotate_right", 1),
-  /* commutative binary operators */
-  BVAND("bvand", 2),
-  BVNAND("bvnand", 2),
-  BVOR("bvor", 2),
-  BVNOR("bvnor", 2),
-  BVXOR("bvxor", 2),
-  BVXNOR("bvxnor", 2),
-  BVADD("bvadd", 2),
-  BVMUL("bvmul", 2),
-  BVCOMP("bvcomp", 2),
-  /* non-commutative binary operators */
-  BVULT("bvult", 2),
-  BVULE("bvule", 2),
-  BVUGT("bvugt", 2),
-  BVUGE("bvuge", 2),
-  BVSLT("bvslt", 2),
-  BVSLE("bvsle", 2),
-  BVSGT("bvsgt", 2),
-  BVSGE("bvsge", 2),
-  BVSHL("bvshl", 2),
-  BVLSHR("bvlshr", 2),
-  BVASHR("bvashr", 2),
-  BVSUB("bvsub", 2),
-  BVUDIV("bvudiv", 2),
-  BVUREM("bvurem", 2),
-  BVSDIV("bvsdiv", 2),
-  BVSREM("bvsrem", 2),
-  BVSMOD("bvsmod", 2),
-  CONCAT("concat", 2),
   /* interpreted predicates */
   LT("<", 2),
   GT(">", 2),
@@ -85,9 +44,6 @@ public enum SMTNodeKind {
   BINMINUS("-", 2),
   MUL("*", 2),
   DIV("/", 2),
-  /* array operators */
-  SELECT("select", 2),
-  STORE("store", 3),
   /* if-then-else on terms */
   ITE("ite", 3),
   UFUNC("extrafun", -1),
@@ -96,7 +52,6 @@ public enum SMTNodeKind {
   protected String string;
 
   protected int arity; /* -1 is used to indicate n-ary operators */
-
 
   SMTNodeKind (String string, int arity){
     this.string = string;
@@ -110,5 +65,4 @@ public enum SMTNodeKind {
   public int getArity() {
     return this.arity;
   }
-
 }

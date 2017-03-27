@@ -19,39 +19,17 @@
 
 import java.util.*;
 
-public enum SMTLogic
-{
-  QF_A,
-  QF_AX,
-  QF_BV,
-  QF_AUFBV,
-  QF_AUFLIA,
-  QF_IDL,
-  QF_LIA,
-  QF_LRA,
-  QF_NIA,
-  QF_NRA,
-  QF_RDL,
-  QF_UF,
-  QF_UFBV,
-  QF_UFIDL,
-  QF_UFLIA,
-  QF_UFLRA,
-  QF_UFNIA,
-  QF_UFNRA,
-  QF_UFRDL,
-  QF_FP, /* Added 2017? See http://smtlib.cs.uiowa.edu/logics.shtml */
-  AUFLIA,
-  AUFLIRA,
-  AUFNIRA;
+public enum SMTLogic {
+  QF_FP; /* Added 2017? See http://smtlib.cs.uiowa.edu/logics.shtml */
 
   public final static HashMap<String, SMTLogic> stringToLogic;
 
   static {
-    EnumSet<SMTLogic> set = EnumSet.range (QF_A, AUFNIRA);
-    stringToLogic = new HashMap<String, SMTLogic>(AUFNIRA.ordinal());
-    for (SMTLogic logic : set)
-      stringToLogic.put (logic.toString(), logic);
+    EnumSet<SMTLogic> set = EnumSet.range(QF_FP, QF_FP);
+    stringToLogic = new HashMap<String, SMTLogic>(QF_FP.ordinal());
+    for (SMTLogic logic : set) {
+      stringToLogic.put(logic.toString(), logic);
+    }
   }
 
 }
