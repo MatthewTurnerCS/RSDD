@@ -258,17 +258,122 @@ public class Options {
 					"  -ref <refs>          set min number of references for terms\n" + 
 					"                       in input and main layer to <refs>      (default  1)\n" +
 					"\n";
+
+	private static void printHelpAndExit () {
+		System.out.println (Options.usage);
+		System.exit (0);
+	}
+
+	private static void printVersionAndExit () {
+		System.out.println (Options.version);
+		System.exit (0);
+	}
+	
+	private static void printErrAndExit (String string) {
+		assert (string != null);
+		System.err.println (string);
+		System.exit (1);
+	}
+	private static void checkMinMax (int min, int max, String str){
+		assert (min >= 0);
+		assert (max >= 0);
+		assert (str != null);
+		if (max < min)
+			printErrAndExit ("minimum number of " + str + " must be <= maximum");
+	}
+
+	private static int parseIntOption (String []args, int pos, int minVal, 
+			String errorMsg) {
+		int result = 0;
+
+		assert (args != null);
+		assert (pos >= 0);
+		assert (pos < args.length);
+		assert (errorMsg != null);
+		if (pos == args.length - 1)
+			printErrAndExit ("option argument missing");
+		try {
+			result = Integer.valueOf(args[pos + 1]).intValue();
+		} catch (NumberFormatException nfe) {
+			printErrAndExit (errorMsg);
+		}
+		if (result < minVal)
+			printErrAndExit (errorMsg);
+		return result;
+	}
+
+	private static long parseLongOption (String []args, int pos, long minVal, 
+			String errorMsg) {
+		long result = 0l;
+
+		assert (args != null);
+		assert (pos >= 0);
+		assert (pos < args.length);
+		assert (errorMsg != null);
+		if (pos == args.length - 1)
+			printErrAndExit ("option argument missing");
+		try {
+			result = Long.valueOf(args[pos + 1]).longValue();
+		} catch (NumberFormatException nfe) {
+			printErrAndExit (errorMsg);
+		}
+		if (result < minVal)
+			printErrAndExit (errorMsg);
+		return result;
+	}
+
+	private static double parseDoubleOption (String []args, int pos, double minVal, 
+			String errorMsg) {
+		double result = 0.0;
+
+		assert (args != null);
+		assert (pos >= 0);
+		assert (pos < args.length);
+		assert (errorMsg != null);
+		if (pos == args.length - 1)
+			printErrAndExit ("option argument missing");
+		try {
+			result = Double.valueOf(args[pos + 1]).doubleValue();
+		} catch (NumberFormatException nfe) {
+			printErrAndExit (errorMsg);
+		}
+		if (result < minVal)
+			printErrAndExit (errorMsg);
+		return result;
+	}
+
 	
 	public static HashMap<String, Object> getDefaults(){
 		HashMap<String, Object> opts = new HashMap<String, Object>();
-		
+		opts.put("", 1);
 		return opts;
 	}
-	
-	public static HashMap<String, Object> getDefaultsForLogic(HashMap<String, Object> opts, SMTLogic logic){
-		switch(logic){
-			default:
-				return getDefaults();
+
+	public static HashMap<String, Object> parseArgs(String[] args){
+		HashMap<String, Object> opts = new HashMap<String, Object>();
+		
+		if (args[0].equals ("-V"))
+			printVersionAndExit ();
+
+		if (args[0].equals ("-h"))
+			printHelpAndExit ();
+		
+		for (int i = 1; i < args.length; i++) {
+			String arg = args[i];
+			if (arg.charAt(0) == '-') {
+				if (arg.equals ("-h")) {
+					printHelpAndExit ();
+				} else if (arg.equals("-V")) {
+					printVersionAndExit ();
+				} 				
+				else { 
+					printErrAndExit ("invalid option: " + arg);
+				}
+			} else {
+				printHelpAndExit();
+			}
 		}
+
+		return opts;		
 	}
 }

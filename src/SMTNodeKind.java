@@ -39,13 +39,12 @@ public enum SMTNodeKind {
   EQ("=", 2),
   DISTINCT("distinct", -1),
   /* interpreted functions */
-  PLUS("+", 2),
+  PLUS("fp.add", 2),
   UNMINUS("~", 1),
   BINMINUS("-", 2),
   MUL("*", 2),
   DIV("/", 2),
   /* if-then-else on terms */
-  ITE("ite", 3),
   UFUNC("extrafun", -1),
   UPRED("extrapred", -1);
 
