@@ -5,3 +5,6 @@ src/fuzzsmt
 .settings/*
 .project
 .classpath
+*.class
+*.swp
+z3/
